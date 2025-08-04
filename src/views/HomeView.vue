@@ -43,7 +43,7 @@ const paginationPrev = () => {
 }
 
 onMounted(() => {
-  getMovies(currentSearch.value)
+  getMovies()
 })
 </script>
 
