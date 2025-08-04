@@ -1,6 +1,6 @@
 # FRONT-SITE-FILMES
 
-# Requisitos do Node.js
+## Requisitos do Node.js
 
 Este projeto requer uma das seguintes versões do Node.js para funcionar corretamente:
 
