@@ -11,7 +11,7 @@ interface State {
     totalPages: 0
 }
 
-export const movieStore = defineStore('movie', {
+export const tmdbStore = defineStore('tmdb', {
     state: (): State => {
         return {
             movies: [],

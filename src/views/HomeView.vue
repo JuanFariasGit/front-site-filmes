@@ -4,30 +4,30 @@ import CardMovie from "@/components/CardMovie.vue";
 import Pagination from "@/components/Pagination.vue";
 import NavBar from "@/components/NavBar.vue";
 import {scrollTop} from "@/utils/helpers";
-import {movieStore} from "@/store/movie";
+import {tmdbStore} from "@/store/tmdb";
 import SearchMovie from "@/components/SearchMovie.vue";
 
 
-const moviestore = movieStore()
+const tmdbstore = tmdbStore()
 
 const paginationNext = () => {
-  if (moviestore.currentPage < moviestore.totalPages) {
-    moviestore.currentPage++
-    moviestore.getMovies()
+  if (tmdbstore.currentPage < tmdbstore.totalPages) {
+    tmdbstore.currentPage++
+    tmdbstore.getMovies()
     scrollTop()
   }
 }
 
 const paginationPrev = () => {
-  if (moviestore.currentPage > 1) {
-    moviestore.currentPage--
-    moviestore.getMovies()
+  if (tmdbstore.currentPage > 1) {
+    tmdbstore.currentPage--
+    tmdbstore.getMovies()
     scrollTop()
   }
 }
 
 onMounted(() => {
-  moviestore.getMovies()
+  tmdbstore.getMovies()
 })
 </script>
 
@@ -37,7 +37,7 @@ onMounted(() => {
   <SearchMovie />
 
   <div class="grid md:grid-cols-4 grid-cols-1 justify-center">
-    <div v-for="movie in moviestore.movies" :key="movie.id" class="md:col-span-1 px-4 col-span-3">
+    <div v-for="movie in tmdbstore.movies" :key="movie.id" class="md:col-span-1 px-4 col-span-3">
       <CardMovie
           :movie="movie"
       />
