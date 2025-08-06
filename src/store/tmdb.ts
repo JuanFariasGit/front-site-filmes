@@ -1,10 +1,11 @@
 import api from "@/service/api";
 import {defineStore} from "pinia";
 import { Movie } from "@/types/movie.types";
+import {Genre} from "@/types/genre.types";
 
 interface State {
     movies: Array<Movie>,
-    favorites: Array<Movie>,
+    genres: Array<Genre>,
     currentSearch: string,
     prevSearch: string,
     currentPage: 1,
@@ -15,7 +16,7 @@ export const tmdbStore = defineStore('tmdb', {
     state: (): State => {
         return {
             movies: [],
-            favorites: [],
+            genres: [],
             currentSearch: '',
             prevSearch: '',
             currentPage: 1,
@@ -33,6 +34,13 @@ export const tmdbStore = defineStore('tmdb', {
             this.movies = results
             this.totalPages = total_pages
             this.prevSearch = this.currentSearch
+
+            return null
+        },
+        async getGenres() {
+            const { data: { genres } } = await api.get('/genres')
+
+            this.genres = genres
 
             return null
         }

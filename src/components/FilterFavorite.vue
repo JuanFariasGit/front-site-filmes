@@ -1,30 +1,21 @@
 <script setup lang="ts">
-import api from "@/service/api";
 import {onMounted, ref} from "vue";
+import {tmdbStore} from "@/store/tmdb";
 
-const optionsFilter = ref([])
 const optionsChosen = ref([])
+const tmdbstore = tmdbStore()
 
 const emit = defineEmits(['get-favorites'])
-
 const getFavorites = () => emit('get-favorites', optionsChosen.value)
 
-const getGenres = async () => {
-  const { data: { genres } } = await api.get('/genres')
-
-  optionsFilter.value = genres
-
-  return null
-}
-
 onMounted( () => {
-  getGenres()
+  tmdbstore.getGenres()
 })
 </script>
 
 <template>
   <div class="flex flex-wrap justify-center">
-    <div v-for="option in optionsFilter" :key="option.id" class="form-control">
+    <div v-for="option in tmdbstore.genres" :key="option.id" class="form-control">
         <label class="label cursor-pointe">
           <span class="label-text">{{ option.name }}</span>
           <input

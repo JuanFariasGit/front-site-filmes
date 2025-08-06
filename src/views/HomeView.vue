@@ -10,6 +10,7 @@ import SearchMovie from "@/components/SearchMovie.vue";
 
 const tmdbstore = tmdbStore()
 
+
 const paginationNext = () => {
   if (tmdbstore.currentPage < tmdbstore.totalPages) {
     tmdbstore.currentPage++
@@ -45,6 +46,7 @@ onMounted(() => {
   </div>
 
   <Pagination
+      :currentPage="tmdbstore.currentPage"
       v-on:paginationPrev="paginationPrev"
       v-on:paginationNext="paginationNext"
   />
