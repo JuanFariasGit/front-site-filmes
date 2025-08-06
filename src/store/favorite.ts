@@ -27,6 +27,22 @@ export const favoriteStore = defineStore('favorite', {
 
             return null
         },
+        async createFavorite(movie) {
+            try {
+                await api.post('/favorites', {
+                    "tmdb_id": movie.id,
+                    "title": movie.title,
+                    "poster_path": movie.poster_path,
+                    "genre_ids": movie.genre_ids
+                })
+
+                alert('Filme favoritado com sucesso.')
+            } catch (error) {
+                alert(error.response.data.message)
+            }
+
+            return null
+        },
         async deleteFavorite(id) {
             if (confirm('Deseja realmente excluir?')) {
                 await api.delete(`/favorites/${id}`)

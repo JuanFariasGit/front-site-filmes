@@ -1,27 +1,12 @@
 <script setup lang="ts">
 import {Movie} from "@/types/movie.types";
-import api from "@/service/api";
+import {favoriteStore} from "@/store/favorite";
 
 defineProps<{
   movie: Movie
 }>()
 
-const favorite = async (movie: Movie) => {
-  try {
-    const response = await api.post('/favorites', {
-      "tmdb_id": movie.id,
-      "title": movie.title,
-      "poster_path": movie.poster_path,
-      "genre_ids": movie.genre_ids
-    })
-
-    alert('Filme favoritado com sucesso.')
-  } catch (error) {
-    alert(error.response.data.message)
-  }
-
-  return null
-}
+const favoritestore = favoriteStore()
 
 </script>
 
@@ -39,7 +24,7 @@ const favorite = async (movie: Movie) => {
       </h2>
 
       <div class="card-actions justify-end">
-        <div class="badge badge-outline cursor-pointer" @click="favorite(movie)">Favoritar</div>
+        <div class="badge badge-outline cursor-pointer" @click="favoritestore.createFavorite(movie)">Favoritar</div>
       </div>
     </div>
   </div>
