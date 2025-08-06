@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import {ref} from "vue"
+import {movieStore} from "@/store/movie";
 
+
+const moviestore = movieStore()
 const search = ref('')
-const emit = defineEmits(['get-movies'])
 
-const getMovies = () => emit('get-movies', search.value)
+moviestore.currentSearch = search
 </script>
 
 <template>
@@ -13,7 +15,7 @@ const getMovies = () => emit('get-movies', search.value)
         type="text"
         placeholder="Buscar filme"
         class="input input-bordered w-full max-w-xs"
-        @keyup="getMovies"
+        @keyup="moviestore.getMovies"
         v-model="search"
     />
   </div>
