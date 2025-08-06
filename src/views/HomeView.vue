@@ -45,7 +45,6 @@ onMounted(() => {
   </div>
 
   <Pagination
-      :current-page="moviestore.currentPage"
       v-on:paginationPrev="paginationPrev"
       v-on:paginationNext="paginationNext"
   />
