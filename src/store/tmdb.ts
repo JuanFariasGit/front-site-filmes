@@ -2,6 +2,7 @@ import api from "@/service/api";
 import {defineStore} from "pinia";
 import { Movie } from "@/types/movie.types";
 import {Genre} from "@/types/genre.types";
+import {useRoute} from "vue-router";
 
 interface State {
     movies: Array<Movie>,
@@ -25,7 +26,9 @@ export const tmdbStore = defineStore('tmdb', {
     },
     actions: {
         async getMovies() {
-            this.currentPage = this.prevSearch != this.currentSearch ? 1 : this.currentPage
+            const route = useRoute()
+
+            this.currentPage = this.prevSearch != this.currentSearch || route ? 1 : this.currentPage
 
             let path = `/movies?search=${this.currentSearch}&page=${this.currentPage}`
 
