@@ -6,7 +6,8 @@ const optionsChosen = ref([])
 const tmdbstore = tmdbStore()
 
 const emit = defineEmits(['get-favorites'])
-const getFavorites = () => emit('get-favorites', optionsChosen.value)
+const getFavorites = () => emit('get-favorites', optionsChosen.value, true)
+
 
 onMounted( () => {
   tmdbstore.getGenres()

@@ -19,15 +19,15 @@ export const favoriteStore = defineStore('favorite', {
         }
     },
     actions: {
-        async getFavorites(genreIds = '') {
-            this.currentPage = this.genreIds != genreIds ? 1 : this.currentPage
+        async getFavorites(genreIds = '', change = false) {
+            this.genreIds = change ? genreIds : this.genreIds
+            this.currentPage = change ? 1 : this.currentPage
 
-            let path = `favorites?genre_ids=${genreIds}&page=${this.currentPage}`
+            let path = `favorites?genre_ids=${this.genreIds}&page=${this.currentPage}`
 
             const { data: { data, per_page, total } } = await api.get(path)
 
             this.favorites = data
-            this.genresIds = genreIds
             this.totalPages = Math.ceil(total / per_page)
 
             return null
