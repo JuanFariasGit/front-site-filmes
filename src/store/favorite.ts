@@ -5,7 +5,8 @@ import { Movie } from "@/types/movie.types";
 interface State {
     favorites: Array<Movie>,
     currentPage: 1,
-    totalPages: 0
+    totalPages: 0,
+    genreIds: ''
 }
 
 export const favoriteStore = defineStore('favorite', {
@@ -13,16 +14,20 @@ export const favoriteStore = defineStore('favorite', {
         return {
             favorites: [],
             currentPage: 1,
-            totalPages: 0
+            totalPages: 0,
+            genreIds: ''
         }
     },
     actions: {
         async getFavorites(genreIds = '') {
+            this.currentPage = this.genreIds != genreIds ? 1 : this.currentPage
+
             let path = `favorites?genre_ids=${genreIds}&page=${this.currentPage}`
 
             const { data: { data, per_page, total } } = await api.get(path)
 
             this.favorites = data
+            this.genresIds = genreIds
             this.totalPages = Math.ceil(total / per_page)
 
             return null
