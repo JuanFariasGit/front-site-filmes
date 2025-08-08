@@ -26,9 +26,7 @@ export const tmdbStore = defineStore('tmdb', {
     },
     actions: {
         async getMovies() {
-            const route = useRoute()
-
-            this.currentPage = this.prevSearch != this.currentSearch || route ? 1 : this.currentPage
+            this.currentPage = this.prevSearch != this.currentSearch ? 1 : this.currentPage
 
             let path = `/movies?search=${this.currentSearch}&page=${this.currentPage}`
 

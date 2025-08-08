@@ -10,6 +10,7 @@ import SearchMovie from "@/components/SearchMovie.vue";
 
 const tmdbstore = tmdbStore()
 
+tmdbstore.$reset()
 
 const paginationNext = () => {
   if (tmdbstore.currentPage < tmdbstore.totalPages) {

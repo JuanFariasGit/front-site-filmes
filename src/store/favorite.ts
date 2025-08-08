@@ -21,10 +21,8 @@ export const favoriteStore = defineStore('favorite', {
     },
     actions: {
         async getFavorites(genreIds = '', change = false) {
-            const route = useRoute()
-
-            this.genreIds = change || route ? genreIds : this.genreIds
-            this.currentPage = change || route ? 1 : this.currentPage
+            this.genreIds = change ? genreIds : this.genreIds
+            this.currentPage = change ? 1 : this.currentPage
 
             let path = `favorites?genre_ids=${this.genreIds}&page=${this.currentPage}`
 

@@ -9,6 +9,7 @@ import {favoriteStore} from "@/store/favorite";
 
 const favoritestore = favoriteStore()
 
+favoritestore.$reset()
 
 const paginationNext = () => {
   if (favoritestore.currentPage < favoritestore.totalPages) {
