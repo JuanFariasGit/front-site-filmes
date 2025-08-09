@@ -1,7 +1,6 @@
 import api from "@/service/api";
 import {defineStore} from "pinia";
-import { Movie } from "@/types/movie.types";
-import {useRoute} from "vue-router";
+import {Movie} from "@/types/movie.types";
 
 interface State {
     favorites: Array<Movie>,
@@ -52,6 +51,13 @@ export const favoriteStore = defineStore('favorite', {
         async deleteFavorite(id) {
             if (confirm('Deseja realmente excluir?')) {
                 await api.delete(`/favorites/${id}`)
+
+                const genreIds = this.genreIds
+
+                if((this.favorites.length - 1) % 20 == 0) {
+                    this.$reset()
+                    this.getFavorites(genreIds, true)
+                }
 
                 this.getFavorites()
             }
