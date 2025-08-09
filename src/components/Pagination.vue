@@ -1,11 +1,8 @@
 <script setup lang="ts">
-  import {tmdbStore} from "@/store/tmdb";
-
   defineProps({
     currentPage: Number
   })
 
-  const tmdbstore = tmdbStore()
   const emit = defineEmits(['pagination-prev', 'pagination-next'])
 
   const paginationPrev = () => emit('pagination-prev')
