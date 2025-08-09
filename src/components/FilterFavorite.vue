@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
 import {tmdbStore} from "@/store/tmdb";
+import {favoriteStore} from "@/store/favorite";
 
 const optionsChosen = ref([])
+
 const tmdbstore = tmdbStore()
-
-const emit = defineEmits(['get-favorites'])
-const getFavorites = () => emit('get-favorites', optionsChosen.value, true)
-
+const favoritestore = favoriteStore()
 
 onMounted( () => {
   tmdbstore.getGenres()
@@ -24,7 +23,7 @@ onMounted( () => {
               class="checkbox"
               :value="option.id"
               v-model="optionsChosen"
-              @change="getFavorites"
+              @change="favoritestore.getFavorites(optionsChosen, true)"
           />
         </label>
     </div>

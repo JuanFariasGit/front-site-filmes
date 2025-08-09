@@ -1,14 +1,13 @@
 <script setup lang="ts">
 import {Movie} from "@/types/movie.types";
-import {ref} from "vue";
+import {favoriteStore} from "@/store/favorite";
 
 defineProps<{
   movie: Movie
 }>()
 
-const movieId = ref('')
-const emit = defineEmits(['delete-favorite'])
-const deleteFavorite = () => emit('delete-favorite', movieId.value)
+const favoritestore = favoriteStore()
+
 </script>
 
 <template>
@@ -25,7 +24,7 @@ const deleteFavorite = () => emit('delete-favorite', movieId.value)
       </h2>
 
       <div class="card-actions justify-end">
-        <div class="badge badge-outline cursor-pointer" @click="deleteFavorite">Excluir</div>
+        <div class="badge badge-outline cursor-pointer" @click="favoritestore.deleteFavorite(movie.id)">Excluir</div>
       </div>
     </div>
   </div>

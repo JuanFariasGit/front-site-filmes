@@ -38,13 +38,13 @@ onMounted(() => {
   <details class="collapse-open bg-base-200">
     <summary class="collapse-title text-xl font-medium">Filtros</summary>
     <div class="collapse-content">
-      <FilterFavorite v-on:getFavorites="favoritestore.getFavorites" />
+      <FilterFavorite />
     </div>
   </details>
 
   <div class="grid md:grid-cols-4 grid-cols-1 justify-center gap-4">
     <div v-for="favorite in favoritestore.favorites" class="md:col-span-1 md:px-0 px-4 col-span-3">
-      <CardFavorite :movie="favorite" v-on:deleteFavorite="favoritestore.deleteFavorite(favorite.id)" />
+      <CardFavorite :movie="favorite" />
     </div>
   </div>
 
